@@ -1,4 +1,4 @@
-package leetcode;
+package judge;
 
 public class PractiseString {
 

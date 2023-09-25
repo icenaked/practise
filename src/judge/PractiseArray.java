@@ -1,4 +1,4 @@
-package leetcode;
+package judge;
 
 import java.util.Arrays;
 
