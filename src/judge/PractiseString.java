@@ -7,8 +7,33 @@ public class PractiseString {
 
         practiseString.romanToInt("III");
 
+        String[] a = new String[]{"flower","flower","flower","flower"};
+        practiseString.longestCommonPrefix(a);
+
     }
 
+    //14. 最长公共前缀
+    public String longestCommonPrefix(String[] strs) {
+        int tempInt=1;
+        int p=1;
+        while(true){
+            for (String s : strs){
+                if (s.equals("")) return "";
+                if (s.length()<tempInt) return strs[0].substring(0,tempInt-1);
+                String tempStr=strs[0].substring(0,tempInt);
+                String subStr = s.substring(0,tempInt);
+                String tempSubString = tempStr.substring(0,tempInt);
+                if(!subStr.equals(tempSubString)){
+                    p=0;
+                    break;
+                }
+            }
+            if (p == 0) break;
+            else tempInt++;
+        }
+        if (tempInt == 1) return "";
+        else return strs[0].substring(0,tempInt-1);
+    }
     //13. 罗马数字转整数
     public int romanToInt(String s) {
                 int a=0;
