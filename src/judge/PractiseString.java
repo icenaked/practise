@@ -10,8 +10,68 @@ public class PractiseString {
         String[] a = new String[]{"flower","flower","flower","flower"};
         practiseString.longestCommonPrefix(a);
 
+        practiseString.gcdOfStrings("leet","code");
+
     }
 
+    //1071. 字符串的最大公因子
+    public String gcdOfStrings(String str1, String str2) {
+        int l1 = str1.length();
+        int l2 = str2.length();
+        int p = l1;
+        while(p>=0){
+            if (p==0) break;
+            int judge=1;
+            if (l1%p==0 && l2%p==0){
+                String temp = str1.substring(0,p);
+                int a = l1/p;int b = l2/p;
+                for (int i=0;i<a;i++){
+                    if (!str1.substring(p*i,p+p*i).equals(temp)){
+                        judge=0;break;
+                    }
+                }
+                for (int i=0;i<b;i++){
+                    if (!str2.substring(p*i,p+p*i).equals(temp)){
+                        judge=0;break;
+                    }
+                }
+                if (judge==1) {
+                    return str1.substring(0,p);
+                }
+                else {
+                    p--;
+                }
+            }
+            else {
+                p--;
+            }
+        }
+        if (p==0) return "";
+        else return str1.substring(0,p);
+    }
+    //1768. 交替合并字符串
+    public String mergeAlternately(String word1, String word2) {
+        int l1 = word1.length();
+        int l2 = word2.length();
+        int p = 0;
+        int q = 0;
+        String r = "";
+        while (p<l1 && q<l2){
+            r = r+word1.substring(p,p+1)+word2.substring(q,q+1);
+            p++;q++;
+        }
+        if (p==l1){
+            if (q<l2){
+                r=r+word2.substring(q,l2);
+            }
+        }
+        else if (q==l2){
+            if (p<l1){
+                r=r+word1.substring(p,l1);
+            }
+        }
+        return r;
+    }
     //14. 最长公共前缀
     public String longestCommonPrefix(String[] strs) {
         int tempInt=1;
