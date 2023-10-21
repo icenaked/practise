@@ -1,5 +1,9 @@
 package judge;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PractiseString {
 
     public static void main(String[] args) {
@@ -12,8 +16,54 @@ public class PractiseString {
 
         practiseString.gcdOfStrings("leet","code");
 
+        int[] b = new int[]{1,0,0,0,1};
+        practiseString.canPlaceFlowers(b,2);
+
     }
 
+    //605. 种花问题
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int x = 0;
+        for (int i=0;i<flowerbed.length;i++){
+            if (flowerbed[i]==0){
+                if (flowerbed.length==1){
+                    return n<=1;
+                }
+                if (i==0){
+                    if (flowerbed[i+1]==0){
+                        flowerbed[i]=1;
+                        x++;
+                    }
+                }
+                else if (i==flowerbed.length-1){
+                    if (flowerbed[i-1]==0){
+                        flowerbed[i]=1;
+                        x++;
+                    }
+                }
+                else {
+                    if (flowerbed[i-1]==0&&flowerbed[i+1]==0){
+                        flowerbed[i]=1;
+                        x++;
+                    }
+                }
+            }
+        }
+        return x>=n ? true:false;
+    }
+    //1431. 拥有最多糖果的孩子
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        int max = 0;
+        for (int a: candies){
+            if (a>max) max = a;
+        }
+        List<Boolean> r = new ArrayList<>();
+        for (int i=0;i<candies.length;i++){
+            if (candies[i]+extraCandies>=max) r.add(true);
+            else r.add(false);
+        }
+        return r;
+    }
     //1071. 字符串的最大公因子
     public String gcdOfStrings(String str1, String str2) {
         int l1 = str1.length();
