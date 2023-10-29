@@ -2,6 +2,7 @@ package judge;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PractiseString {
@@ -19,8 +20,35 @@ public class PractiseString {
         int[] b = new int[]{1,0,0,0,1};
         practiseString.canPlaceFlowers(b,2);
 
+        practiseString.reverseVowels("leetcode");
+
     }
 
+    //345. 反转字符串中的元音字母
+    public String reverseVowels(String s) {
+        char[] b = new char[]{'a','e','i','o','u'};
+        List<Character> c = new ArrayList<>();
+        LinkedList<Character> d = new LinkedList<Character>();
+        for (int i=0;i<s.length();i++){
+            if ("aeiouAEIOU".indexOf(s.charAt(i)) >= 0){
+                d.addFirst(s.charAt(i));
+            }
+        }
+        for (int i=0;i<s.length();i++){
+            if ("aeiouAEIOU".indexOf(s.charAt(i)) >= 0){
+                c.add(d.getFirst());
+                d.removeFirst();
+            }
+            else {
+                c.add(s.charAt(i));
+            }
+        }
+        String x = "";
+        for (char v:c){
+            x=x+v;
+        }
+        return x;
+    }
     //605. 种花问题
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         int x = 0;
