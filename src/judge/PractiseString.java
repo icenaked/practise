@@ -10,10 +10,22 @@ public class PractiseString {
         String[] a = new String[]{"flower","flower","flower","flower"};
         practiseString.longestCommonPrefix(a);
 
-        practiseString.gcdOfStrings("leet","code");
+        practiseString.reverseWords("  hello world  ");
 
     }
 
+    //151. 反转字符串中的单词
+    public String reverseWords(String s) {
+        String[] x = s.split(" ");
+        String r = "";
+        for (int i=0;i<x.length;i++){
+            if (!x[x.length-1-i].equals("")){
+                if (!r.equals("")) r=r+" ";
+                r=r+x[x.length-1-i];
+            }
+        }
+        return r;
+    }
     //1071. 字符串的最大公因子
     public String gcdOfStrings(String str1, String str2) {
         int l1 = str1.length();
