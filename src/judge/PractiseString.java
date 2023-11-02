@@ -15,7 +15,7 @@ public class PractiseString {
         String[] a = new String[]{"flower","flower","flower","flower"};
         practiseString.longestCommonPrefix(a);
 
-        practiseString.gcdOfStrings("leet","code");
+        practiseString.reverseWords("  hello world  ");
 
         int[] b = new int[]{1,0,0,0,1};
         practiseString.canPlaceFlowers(b,2);
@@ -24,6 +24,18 @@ public class PractiseString {
 
     }
 
+    //151. 反转字符串中的单词
+    public String reverseWords(String s) {
+        String[] x = s.split(" ");
+        String r = "";
+        for (int i=0;i<x.length;i++){
+            if (!x[x.length-1-i].equals("")){
+                if (!r.equals("")) r=r+" ";
+                r=r+x[x.length-1-i];
+            }
+        }
+        return r;
+    }
     //345. 反转字符串中的元音字母
     public String reverseVowels(String s) {
         char[] b = new char[]{'a','e','i','o','u'};
