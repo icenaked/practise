@@ -14,6 +14,25 @@ public class PractiseArray {
         System.out.println(Arrays.toString(b));
     }
 
+    //334. 递增的三元子序列
+    public boolean increasingTriplet(int[] nums) {
+        int n = nums.length;
+        if (n < 3) {
+            return false;
+        }
+        int first = nums[0], second = Integer.MAX_VALUE;
+        for (int i = 1; i < n; i++) {
+            int num = nums[i];
+            if (num > second) {
+                return true;
+            } else if (num > first) {
+                second = num;
+            } else {
+                first = num;
+            }
+        }
+        return false;
+    }
     //238. 除自身以外数组的乘积
     public int[] productExceptSelf(int[] nums) {
         int length = nums.length;

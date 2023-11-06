@@ -21,9 +21,49 @@ public class PractiseString {
         practiseString.canPlaceFlowers(b,2);
 
         practiseString.reverseVowels("leetcode");
+        char[] c = new char[]{'a','a','b','b','c','c','c'};
+        practiseString.compress(c);
 
     }
 
+    //443. 压缩字符串
+    public int compress(char[] chars) {
+        int l=chars.length;
+        int p=-1;
+        char temp=chars[0];
+        int count=0;
+        for (int i=0;i<l;i++){
+            if (chars[i]==temp){
+                count++;
+                if (i==l-1){
+                    chars[++p]=temp;
+                    if(count>1){
+                        String cString=String.valueOf(count);
+                        for (int j=0;j<cString.length();j++){
+                            p++;
+                            chars[p]=cString.charAt(j);
+                        }
+                    }
+                }
+            }
+            else {
+                chars[++p]=temp;
+                temp=chars[i];
+                if(count>1){
+                    String cString=String.valueOf(count);
+                    for (int j=0;j<cString.length();j++){
+                        p++;
+                        chars[p]=cString.charAt(j);
+                    }
+                }
+                count=1;
+                if (i==l-1){
+                    chars[++p]=temp;
+                }
+            }
+        }
+        return p+1;
+    }
     //151. 反转字符串中的单词
     public String reverseWords(String s) {
         String[] x = s.split(" ");
