@@ -7,6 +7,24 @@ public class PractiseHash {
         PractiseHash practiseHash=new PractiseHash();
         int[] a={1,2,2,1,1,3};
         practiseHash.uniqueOccurrences(a);
+        practiseHash.equalPairs(new int[][]{{3,2,1},{1,7,6},{2,7,7}});
+    }
+    //2352. 相等行列对
+    public int equalPairs(int[][] grid) {
+        int n = grid.length;
+        int r=0;
+        int[][] a = new int[n][n];
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                a[i][j]=grid[j][i];
+            }
+        }
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if (Arrays.equals(grid[i],a[j])) r++;
+            }
+        }
+        return r;
     }
     //
     public boolean uniqueOccurrences(int[] arr) {

@@ -2,12 +2,27 @@ package judge;
 
 import utils.ListNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PractiseLink {
 
     public static void main(String[] args) {
         PractiseLink practiseLink = new PractiseLink();
     }
 
+    //206. 反转链表
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
     //83. 删除排序链表中的重复元素
     public ListNode deleteDuplicates(ListNode head) {
         ListNode pointer = head;
