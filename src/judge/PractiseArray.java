@@ -9,11 +9,28 @@ public class PractiseArray {
     public static void main(String[] args) {
         PractiseArray practiseArray = new PractiseArray();
 
-        int[] a = new int[]{3,2,4};
-        int[] b = practiseArray.twoSum(a,6);
-        System.out.println(Arrays.toString(b));
+        int[] a = new int[]{1,7,3,6,5,6};
+        int b = practiseArray.pivotIndex(a);
     }
 
+    //724. 寻找数组的中心下标
+    public int pivotIndex(int[] nums) {
+        int pre=0;
+        int sum=0;
+        int n=nums.length;
+        int left=0;
+        int right=0;
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+        }
+        for(int i=0;i<n;i++){
+            left=pre;
+            right=sum-left-nums[i];
+            if(left==right) return i;
+            pre+=nums[i];
+        }
+        return -1;
+    }
     //334. 递增的三元子序列
     public boolean increasingTriplet(int[] nums) {
         int n = nums.length;
