@@ -2,9 +2,7 @@ package judge;
 
 import utils.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class PractiseTree {
     public static void main(String[] args) {
@@ -22,7 +20,34 @@ public class PractiseTree {
         int a=practiseTree.pathSum(t9,8);
     }
 
+    //199. 二叉树的右视图
+    public List<Integer> rightSideView(TreeNode root) {
+        Map<Integer,Integer> map = new HashMap<>();
+        Queue<TreeNode> treeNodeQueue = new LinkedList<>();
+        Queue<Integer> depthQueue = new LinkedList<>();
 
+        treeNodeQueue.add(root);
+        depthQueue.add(0);
+
+        while (!treeNodeQueue.isEmpty()){
+            TreeNode temp = treeNodeQueue.remove();
+            int depth = depthQueue.remove();
+
+            if (temp!=null) {
+                treeNodeQueue.add(temp.left);
+                treeNodeQueue.add(temp.right);
+                depthQueue.add(depth + 1);
+                depthQueue.add(depth + 1);
+
+                map.put(depth, temp.val);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()){
+            list.add(entry.getValue());
+        }
+        return list;
+    }
     //236. 二叉树的最近公共祖先
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;

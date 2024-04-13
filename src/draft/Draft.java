@@ -1,38 +1,73 @@
 package draft;
 
+import java.util.concurrent.Semaphore;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class Draft {
+    static class Printabc{
+        Semaphore a=new Semaphore(1);
+        Semaphore b=new Semaphore(0);
+        Semaphore c=new Semaphore(0);
+        public void printA() throws InterruptedException {
+            for(int i=0;i<10;i++){
+                a.acquire();
+                System.out.print("a");
+                b.release();
+            }
+        }
+        public void printB() throws InterruptedException {
+            for(int i=0;i<10;i++){
+                b.acquire();
+                System.out.print("b");
+                c.release();
+            }
+        }
+        public void printC() throws InterruptedException {
+            for(int i=0;i<10;i++){
+                c.acquire();
+                System.out.print("c");
+                a.release();
+            }
+        }
+    }
     static int[] b={4,5,6};
     public static void main(String[] args) {
-        f("aasdfghjkl","sgtrejkl");
-    }
-    public static void f(String text1,String text2){
-        int m = text1.length(), n = text2.length();
-        String[][] dp = new String[m + 1][n + 1];
-        for (int i=0;i<=m;i++){
-            for(int j=0;j<=n;j++){
-                dp[i][j]="";
-            }
-        }
-        for (int i = 1; i <= m; i++) {
-            char c1 = text1.charAt(i - 1);
-            for (int j = 1; j <= n; j++) {
-                char c2 = text2.charAt(j - 1);
-                if (c1 == c2) {
-                    dp[i][j] = dp[i - 1][j - 1] + c1;
-                } else {
-                    if(dp[i - 1][j].length() >= dp[i][j - 1].length() ){
-                        dp[i][j]=dp[i - 1][j];
-                    }
-                    else{
-                        dp[i][j]=dp[i][j - 1];
-                    }
+        Printabc x=new Printabc();
+        Thread t1=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    x.printA();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
-        }
-        System.out.println(dp[m][n]);
+        });
+        Thread t2=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    x.printB();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        Thread t3=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    x.printC();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        t1.start();
+        t2.start();
+        t3.start();
     }
 
 }

@@ -9,10 +9,37 @@ public class PractiseArray {
     public static void main(String[] args) {
         PractiseArray practiseArray = new PractiseArray();
 
-        int[] a = new int[]{1,7,3,6,5,6};
+        int[] a = new int[]{4,4,1,3,1,3,2,2,5,5,1,5,2,1,2,3,5,4};
+        int c = practiseArray.maxOperations(a,2);
+//        int[] a = new int[]{1,7,3,6,5,6};
         int b = practiseArray.pivotIndex(a);
     }
 
+
+    //1679. K 和数对的最大数目
+    public int maxOperations(int[] nums, int k) {
+        int n=0;
+        int p=0;
+        int q=nums.length-1;
+        Integer[] x = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+        Arrays.sort(x, (a,b)->{
+            return b-a;
+        });
+        while(p<q){
+            if(x[p]+x[q]==k){
+                p++;
+                q--;
+                n++;
+            }
+            else if(x[p]+x[q]<k){
+                q--;
+            }
+            else{
+                p++;
+            }
+        }
+        return n;
+    }
     //724. 寻找数组的中心下标
     public int pivotIndex(int[] nums) {
         int pre=0;
